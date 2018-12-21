@@ -8,14 +8,30 @@ NOCOLOR=`tput sgr0`
 
 echo -e "Welcome to ${GREEN}Assimp-iOS-Lite${NOCOLOR} build script 🙂\n"
 
+BUILD_FROM_MASTER=false
+
+echo -e "Would you like to build the lib from last release version (4.1.0)?  [y/n] 🤔"
+read BUILD_VERSION_ANSWER
+case "$BUILD_VERSION_ANSWER" in
+  [yY][eE][sS]|[yY])
+  BUILD_FROM_MASTER=false
+  ;;
+  *)
+  printf "\n"
+  echo "OK, we'll use master branch."
+  BUILD_FROM_MASTER=true
+  ;;
+esac
+
 # Get assimp sources
 ASSIMP_SOURCES_FOLDER=""
+printf "\n"
 echo -e "Do you have a local copy of ${MAGENTA}Assimp${NOCOLOR} sources from ${YELLOW}GitHub${NOCOLOR}? [y/n] 🤔"
 read SOURCE_CODE
 case "$SOURCE_CODE" in
   [yY][eE][sS]|[yY])
   printf "\n"
-  echo "Please enter the path to ${MAGENTA}Assimp${NOCOLOR} ${YELLOW}sources folder${NOCOLOR}. [For example '${GREEN}../../assimp-4.1.0/${NOCOLOR}']"
+  echo "Please enter the path to ${MAGENTA}Assimp${NOCOLOR} ${YELLOW}sources folder${NOCOLOR}. [For example '${GREEN}../../assimp/${NOCOLOR}']"
   read SOURCES_FOLDER
 
   cd $SOURCES_FOLDER > /dev/null
@@ -23,7 +39,7 @@ case "$SOURCE_CODE" in
     ASSIMP_SOURCES_FOLDER=$SOURCES_FOLDER
   else
     printf "\n"
-    echo "Unfortunately this is ${RED}not a git folder${NOCOLOR}. We need a ${GREEN}git forlder${NOCOLOR} to checkout to ${GREEN}4.1.0 version${NOCOLOR}."
+    echo "Unfortunately this is ${RED}not a git folder${NOCOLOR}. We need a ${GREEN}git forlder${NOCOLOR} that contains Assimp sources."
   fi;
   cd - > /dev/null
   ;;
@@ -32,7 +48,7 @@ esac
 if [ "$ASSIMP_SOURCES_FOLDER" = "" ]
 then
   printf "\n"
-  echo "OK, let's download the source code from ${YELLOW}GitHub${NOCOLOR}. Please enter the path to ${YELLOW}save-to directory${NOCOLOR}. [For example '${GREEN}../../assimp-4.1.0/${NOCOLOR}']"
+  echo "OK, let's download the source code from ${YELLOW}GitHub${NOCOLOR}. Please enter the path to ${YELLOW}save-to directory${NOCOLOR}. [For example '${GREEN}../../assimp/${NOCOLOR}']"
   read DOWNLOAD_FOLDER
   # Refresh download folder
   sudo rm -rf $DOWNLOAD_FOLDER
@@ -51,7 +67,11 @@ then
 fi
 
 # Checkout 4.1.0
-cd $ASSIMP_SOURCES_FOLDER > /dev/null && git checkout 80799bdbf90ce626475635815ee18537718a05b1 && cd - > /dev/null
+if [ $BUILD_FROM_MASTER == true ]; then
+  cd $ASSIMP_SOURCES_FOLDER > /dev/null && git checkout master && cd - > /dev/null
+else
+  cd $ASSIMP_SOURCES_FOLDER > /dev/null && git checkout 80799bdbf90ce626475635815ee18537718a05b1 && cd - > /dev/null
+fi;
 
 # Get build folder path
 printf "\n"
