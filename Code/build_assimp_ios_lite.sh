@@ -41,7 +41,6 @@ then
   git clone https://github.com/assimp/assimp.git --recursive $DOWNLOAD_FOLDER
   printf "\n"
   echo "Successfully downloaded  ${MAGENTA}Assimp${NOCOLOR} sources from ${YELLOW}GitHub${NOCOLOR} to ${GREEN}$DOWNLOAD_FOLDER${NOCOLOR} 👌"
-  cd $DOWNLOAD_FOLDER > /dev/null && git checkout 80799bdbf90ce626475635815ee18537718a05b1 && cd - > /dev/null
   ASSIMP_SOURCES_FOLDER=$DOWNLOAD_FOLDER
 fi
 
@@ -50,6 +49,9 @@ if [ "${ASSIMP_SOURCES_FOLDER:$((${#ASSIMP_SOURCES_FOLDER}-1)):1}" != "/" ]
 then
   ASSIMP_SOURCES_FOLDER+="/"
 fi
+
+# Checkout 4.1.0
+cd $ASSIMP_SOURCES_FOLDER > /dev/null && git checkout 80799bdbf90ce626475635815ee18537718a05b1 && cd - > /dev/null
 
 # Get build folder path
 printf "\n"
