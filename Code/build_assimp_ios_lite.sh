@@ -272,4 +272,6 @@ lipo $LIPO_LIBASSIMP_ARGS
 lipo $LIPO_LIBIRRXML_ARGS
 lipo $LIPO_LIBZLIBSTATIC_ARGS
 
-echo "[!] Done! The fat binary can be found at $BUILD_DIR"
+echo "Done! The fat binary can be found at $BUILD_DIR"
+
+open $BUILD_DIR
