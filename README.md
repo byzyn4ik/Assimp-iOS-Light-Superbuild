@@ -6,6 +6,7 @@ This script will help you to build your own custom light version of Assimp for i
 
 * Easy-to-use
 * Automatic download of Assimp sources if needed
+* Select between latest release`v4.1.0` and master branch
 * Choose necessary `importers`
 * Choose necessary `architectures`
 * Choose necessary `C++ version`
