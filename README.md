@@ -8,6 +8,8 @@ This script will help you to build your own custom light version of Assimp for i
 * Automatic download of Assimp sources if needed
 * Choose necessary `importers`
 * Choose necessary `architectures`
+* Choose necessary `C++ version`
+* Choose necessary `STD lib`
 
 <p align="center">
     <img src="Media/Assimp-iOS-Light-Superbuild.png", width="800">
