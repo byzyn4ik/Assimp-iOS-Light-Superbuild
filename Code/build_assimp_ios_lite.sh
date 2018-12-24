@@ -129,18 +129,18 @@ done
 
 # Select archs
 printf "\n"
-echo "You are able to build a multiple architecture fat library. Please, choose the names of the architectures [${YELLOW}armv7 armv7s arm64 i386 x86_64${NOCOLOR}] you'd like to include. [For example: '${GREEN}arm64 x86_64${NOCOLOR}'. Type '${GREEN}all${NOCOLOR}' to include all the archs.]"
+echo "You are able to build a multiple architecture fat library. Please, choose the names of the architectures [${YELLOW}armv7 armv7s arm64 arm64e i386 x86_64${NOCOLOR}] you'd like to include. [For example: '${GREEN}arm64 x86_64${NOCOLOR}'. Type '${GREEN}all${NOCOLOR}' to include all the archs.]"
 read SELECTED_ARCHS_TO_BUILD
 
 FILTERED_ARRAY_OF_ARCHS=()
 for arch in $SELECTED_ARCHS_TO_BUILD
 do
   case $arch in
-    armv7 | armv7s | arm64 | i386 | x86_64)
+    armv7 | armv7s | arm64 | arm64e | i386 | x86_64)
     FILTERED_ARRAY_OF_ARCHS+=($arch)
     ;;
     all)
-    FILTERED_ARRAY_OF_ARCHS+=("armv7 armv7s arm64 i386 x86_64")
+    FILTERED_ARRAY_OF_ARCHS+=("armv7 armv7s arm64 arm64e i386 x86_64")
     ;;
     *)
     printf "\n"
@@ -160,9 +160,9 @@ IOS_SDK_DEVICE=
 XCODE_ROOT_DIR=/Applications/Xcode.app/Contents
 TOOLCHAIN=$XCODE_ROOT_DIR//Developer/Toolchains/XcodeDefault.xctoolchain
 
-BUILD_ARCHS_DEVICE="armv7 armv7s arm64"
+BUILD_ARCHS_DEVICE="armv7 armv7s arm64 arm64e"
 BUILD_ARCHS_SIMULATOR="i386 x86_64"
-BUILD_ARCHS_ALL=(armv7 armv7s arm64 i386 x86_64)
+BUILD_ARCHS_ALL=(armv7 armv7s arm64 arm64e i386 x86_64)
 
 CPP_DEV_TARGET_LIST=(miphoneos-version-min mios-simulator-version-min)
 CPP_DEV_TARGET=
