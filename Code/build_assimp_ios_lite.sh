@@ -51,7 +51,7 @@ then
   echo "OK, let's download the source code from ${YELLOW}GitHub${NOCOLOR}. Please enter the path to ${YELLOW}save-to directory${NOCOLOR}. [For example '${GREEN}../../assimp/${NOCOLOR}']"
   read DOWNLOAD_FOLDER
   # Refresh download folder
-  sudo rm -rf $DOWNLOAD_FOLDER
+  rm -rf $DOWNLOAD_FOLDER
   mkdir $DOWNLOAD_FOLDER
   # Clone sources from GitHub
   git clone https://github.com/assimp/assimp.git --recursive $DOWNLOAD_FOLDER
@@ -85,7 +85,7 @@ then
 fi
 
 # Refresh build folder
-sudo rm -rf $BUILD_DIR
+rm -rf $BUILD_DIR
 mkdir $BUILD_DIR
 
 # Begin to construct arguments for build script
